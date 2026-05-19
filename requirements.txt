@@ -1,0 +1,9 @@
+undetected-chromedriver
+selenium
+pandas
+opencv-python
+pytesseract
+Pillow
+psutil
+setuptools
+numpy

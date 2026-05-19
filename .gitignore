@@ -1,0 +1,29 @@
+# Attendance output files (generated at runtime)
+attendance_logs/
+
+# Screenshots (generated at runtime)
+breakout_screenshots/
+
+# Python cache
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+
+# Virtual environment
+venv/
+env/
+.env
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# IDE files
+.vscode/
+.idea/
+*.sublime-project
+
+# Logs
+*.log

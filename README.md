@@ -87,6 +87,10 @@ Reports are saved to the `attendance_logs/` folder:
 6. **Merge logic** combines multi-scroll results, using the first screenshot as canonical room list to prevent duplicates
 7. **Session tracking** logs join/leave events and calculates durations
 
+## Alternative: DOM-based tracker (no OCR)
+
+`GMA_tracker_dom.py` reads names and breakout rooms directly from the Meet page DOM instead of screenshots + OCR. See [`DOM_APPROACH_DESIGN.md`](DOM_APPROACH_DESIGN.md) for design, usage and the first-run checklist (not yet verified against live Meet).
+
 ## Notes
 
 - Requires the host Google account to be logged in

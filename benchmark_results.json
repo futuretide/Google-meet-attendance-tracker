@@ -1,0 +1,836 @@
+[
+  {
+    "scenario": "S01 small main only",
+    "participants": 5,
+    "rooms": 1,
+    "dom": {
+      "truth": 5,
+      "detected": 5,
+      "missed": 0,
+      "spurious": 0,
+      "room_correct": 5,
+      "near_miss": 0,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "room_accuracy": 1.0,
+      "missed_names": [],
+      "spurious_names": []
+    },
+    "dom_seconds": 0.652,
+    "ocr": {
+      "truth": 5,
+      "detected": 5,
+      "missed": 0,
+      "spurious": 0,
+      "room_correct": 5,
+      "near_miss": 0,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "room_accuracy": 1.0,
+      "missed_names": [],
+      "spurious_names": []
+    },
+    "ocr_seconds": 0.78,
+    "ocr_screenshots": 1
+  },
+  {
+    "scenario": "S02 30 people main",
+    "participants": 30,
+    "rooms": 1,
+    "dom": {
+      "truth": 30,
+      "detected": 30,
+      "missed": 0,
+      "spurious": 0,
+      "room_correct": 30,
+      "near_miss": 0,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "room_accuracy": 1.0,
+      "missed_names": [],
+      "spurious_names": []
+    },
+    "dom_seconds": 1.273,
+    "ocr": {
+      "truth": 30,
+      "detected": 26,
+      "missed": 4,
+      "spurious": 11,
+      "room_correct": 26,
+      "near_miss": 0,
+      "precision": 0.7027,
+      "recall": 0.8667,
+      "f1": 0.7761,
+      "room_accuracy": 0.8667,
+      "missed_names": [
+        "amelia scott",
+        "bob jones",
+        "emma taylor",
+        "ethan young"
+      ],
+      "spurious_names": [
+        "adams",
+        "amelia",
+        "carter",
+        "emma",
+        "ethan",
+        "harper"
+      ]
+    },
+    "ocr_seconds": 3.61,
+    "ocr_screenshots": 3
+  },
+  {
+    "scenario": "S03 3 breakout rooms",
+    "participants": 22,
+    "rooms": 4,
+    "dom": {
+      "truth": 22,
+      "detected": 22,
+      "missed": 0,
+      "spurious": 0,
+      "room_correct": 22,
+      "near_miss": 0,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "room_accuracy": 1.0,
+      "missed_names": [],
+      "spurious_names": []
+    },
+    "dom_seconds": 0.961,
+    "ocr": {
+      "truth": 22,
+      "detected": 21,
+      "missed": 1,
+      "spurious": 3,
+      "room_correct": 3,
+      "near_miss": 0,
+      "precision": 0.875,
+      "recall": 0.9545,
+      "f1": 0.913,
+      "room_accuracy": 0.1364,
+      "missed_names": [
+        "bob jones"
+      ],
+      "spurious_names": [
+        "jones",
+        "lewis",
+        "mason"
+      ]
+    },
+    "ocr_seconds": 2.39,
+    "ocr_screenshots": 2
+  },
+  {
+    "scenario": "S04 60 people (scrolling)",
+    "participants": 60,
+    "rooms": 3,
+    "dom": {
+      "truth": 60,
+      "detected": 60,
+      "missed": 0,
+      "spurious": 0,
+      "room_correct": 60,
+      "near_miss": 0,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "room_accuracy": 1.0,
+      "missed_names": [],
+      "spurious_names": []
+    },
+    "dom_seconds": 1.908,
+    "ocr": {
+      "truth": 60,
+      "detected": 21,
+      "missed": 39,
+      "spurious": 31,
+      "room_correct": 15,
+      "near_miss": 0,
+      "precision": 0.4038,
+      "recall": 0.35,
+      "f1": 0.375,
+      "room_accuracy": 0.25,
+      "missed_names": [
+        "amelia s44son",
+        "amelia scott",
+        "ava m38son",
+        "bob f31son",
+        "bob jones",
+        "chloe c54son"
+      ],
+      "spurious_names": [
+        "amelia",
+        "campbell",
+        "carter",
+        "chloe",
+        "dylan",
+        "e56son"
+      ]
+    },
+    "ocr_seconds": 6.41,
+    "ocr_screenshots": 5
+  },
+  {
+    "scenario": "S05 hard names (accents/CJK/emoji)",
+    "participants": 10,
+    "rooms": 1,
+    "dom": {
+      "truth": 10,
+      "detected": 10,
+      "missed": 0,
+      "spurious": 0,
+      "room_correct": 10,
+      "near_miss": 0,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "room_accuracy": 1.0,
+      "missed_names": [],
+      "spurious_names": []
+    },
+    "dom_seconds": 0.648,
+    "ocr": {
+      "truth": 10,
+      "detected": 1,
+      "missed": 9,
+      "spurious": 5,
+      "room_correct": 1,
+      "near_miss": 0,
+      "precision": 0.1667,
+      "recall": 0.1,
+      "f1": 0.125,
+      "room_accuracy": 0.1,
+      "missed_names": [
+        "alexandria montgomery-wellington",
+        "ali",
+        "dr. priya raghavan-iyer",
+        "jean-luc picard",
+        "josé núñez",
+        "sam 🌸"
+      ],
+      "spurious_names": [
+        "josé nufiez",
+        "mapua",
+        "miller",
+        "picard",
+        "priya"
+      ]
+    },
+    "ocr_seconds": 1.02,
+    "ocr_screenshots": 1
+  },
+  {
+    "scenario": "S06 markup: h2 headings",
+    "participants": 10,
+    "rooms": 2,
+    "dom": {
+      "truth": 10,
+      "detected": 10,
+      "missed": 0,
+      "spurious": 0,
+      "room_correct": 10,
+      "near_miss": 0,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "room_accuracy": 1.0,
+      "missed_names": [],
+      "spurious_names": []
+    },
+    "dom_seconds": 0.651,
+    "ocr": {
+      "truth": 10,
+      "detected": 8,
+      "missed": 2,
+      "spurious": 3,
+      "room_correct": 4,
+      "near_miss": 0,
+      "precision": 0.7273,
+      "recall": 0.8,
+      "f1": 0.7619,
+      "room_accuracy": 0.4,
+      "missed_names": [
+        "bob jones",
+        "mason lewis"
+      ],
+      "spurious_names": [
+        "jones",
+        "lewis",
+        "mason"
+      ]
+    },
+    "ocr_seconds": 1.04,
+    "ocr_screenshots": 1
+  },
+  {
+    "scenario": "S07 markup: aria-expanded",
+    "participants": 10,
+    "rooms": 2,
+    "dom": {
+      "truth": 10,
+      "detected": 10,
+      "missed": 0,
+      "spurious": 0,
+      "room_correct": 10,
+      "near_miss": 0,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "room_accuracy": 1.0,
+      "missed_names": [],
+      "spurious_names": []
+    },
+    "dom_seconds": 0.65,
+    "ocr": {
+      "truth": 10,
+      "detected": 8,
+      "missed": 2,
+      "spurious": 3,
+      "room_correct": 4,
+      "near_miss": 0,
+      "precision": 0.7273,
+      "recall": 0.8,
+      "f1": 0.7619,
+      "room_accuracy": 0.4,
+      "missed_names": [
+        "bob jones",
+        "mason lewis"
+      ],
+      "spurious_names": [
+        "jones",
+        "lewis",
+        "mason"
+      ]
+    },
+    "ocr_seconds": 1.08,
+    "ocr_screenshots": 1
+  },
+  {
+    "scenario": "S08 markup: text-only rows",
+    "participants": 8,
+    "rooms": 1,
+    "dom": {
+      "truth": 8,
+      "detected": 8,
+      "missed": 0,
+      "spurious": 0,
+      "room_correct": 8,
+      "near_miss": 0,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "room_accuracy": 1.0,
+      "missed_names": [],
+      "spurious_names": []
+    },
+    "dom_seconds": 0.652,
+    "ocr": {
+      "truth": 8,
+      "detected": 6,
+      "missed": 2,
+      "spurious": 3,
+      "room_correct": 6,
+      "near_miss": 0,
+      "precision": 0.6667,
+      "recall": 0.75,
+      "f1": 0.7059,
+      "room_accuracy": 0.75,
+      "missed_names": [
+        "bob jones",
+        "emma taylor"
+      ],
+      "spurious_names": [
+        "emma",
+        "jones",
+        "taylor"
+      ]
+    },
+    "ocr_seconds": 0.9,
+    "ocr_screenshots": 1
+  },
+  {
+    "scenario": "S09 markup: nested aria",
+    "participants": 8,
+    "rooms": 1,
+    "dom": {
+      "truth": 8,
+      "detected": 8,
+      "missed": 0,
+      "spurious": 0,
+      "room_correct": 8,
+      "near_miss": 0,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "room_accuracy": 1.0,
+      "missed_names": [],
+      "spurious_names": []
+    },
+    "dom_seconds": 0.646,
+    "ocr": {
+      "truth": 8,
+      "detected": 6,
+      "missed": 2,
+      "spurious": 3,
+      "room_correct": 6,
+      "near_miss": 0,
+      "precision": 0.6667,
+      "recall": 0.75,
+      "f1": 0.7059,
+      "room_accuracy": 0.75,
+      "missed_names": [
+        "bob jones",
+        "emma taylor"
+      ],
+      "spurious_names": [
+        "emma",
+        "jones",
+        "taylor"
+      ]
+    },
+    "ocr_seconds": 0.91,
+    "ocr_screenshots": 1
+  },
+  {
+    "scenario": "S11 OCR-native chips layout",
+    "participants": 18,
+    "rooms": 3,
+    "dom": {
+      "truth": 18,
+      "detected": 18,
+      "missed": 0,
+      "spurious": 0,
+      "room_correct": 18,
+      "near_miss": 0,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "room_accuracy": 1.0,
+      "missed_names": [],
+      "spurious_names": []
+    },
+    "dom_seconds": 0.645,
+    "ocr": {
+      "truth": 18,
+      "detected": 0,
+      "missed": 18,
+      "spurious": 6,
+      "room_correct": 0,
+      "near_miss": 0,
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1": 0.0,
+      "room_accuracy": 0.0,
+      "missed_names": [
+        "amelia scott",
+        "ava clark",
+        "bob jones",
+        "emma taylor",
+        "ethan young",
+        "harper adams"
+      ],
+      "spurious_names": [
+        "brown",
+        "green",
+        "lewis",
+        "moore",
+        "wilson",
+        "young"
+      ]
+    },
+    "ocr_seconds": 0.66,
+    "ocr_screenshots": 1
+  },
+  {
+    "scenario": "S12 OCR-native, 30 people",
+    "participants": 30,
+    "rooms": 3,
+    "dom": {
+      "truth": 30,
+      "detected": 30,
+      "missed": 0,
+      "spurious": 0,
+      "room_correct": 30,
+      "near_miss": 0,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "room_accuracy": 1.0,
+      "missed_names": [],
+      "spurious_names": []
+    },
+    "dom_seconds": 0.961,
+    "ocr": {
+      "truth": 30,
+      "detected": 0,
+      "missed": 30,
+      "spurious": 13,
+      "room_correct": 0,
+      "near_miss": 0,
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1": 0.0,
+      "room_accuracy": 0.0,
+      "missed_names": [
+        "amelia scott",
+        "ava clark",
+        "bob jones",
+        "chloe phillips",
+        "dylan evans",
+        "ella mitchell"
+      ],
+      "spurious_names": [
+        "baker",
+        "brown",
+        "camnhell",
+        "campbell",
+        "carter",
+        "collins"
+      ]
+    },
+    "ocr_seconds": 1.35,
+    "ocr_screenshots": 2
+  },
+  {
+    "scenario": "S10 empty rooms",
+    "participants": 6,
+    "rooms": 3,
+    "dom": {
+      "truth": 6,
+      "detected": 6,
+      "missed": 0,
+      "spurious": 0,
+      "room_correct": 6,
+      "near_miss": 0,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "room_accuracy": 1.0,
+      "missed_names": [],
+      "spurious_names": []
+    },
+    "dom_seconds": 0.643,
+    "ocr": {
+      "truth": 6,
+      "detected": 4,
+      "missed": 2,
+      "spurious": 3,
+      "room_correct": 2,
+      "near_miss": 0,
+      "precision": 0.5714,
+      "recall": 0.6667,
+      "f1": 0.6154,
+      "room_accuracy": 0.3333,
+      "missed_names": [
+        "bob jones",
+        "liam brown"
+      ],
+      "spurious_names": [
+        "brown",
+        "jones",
+        "liam"
+      ]
+    },
+    "ocr_seconds": 0.92,
+    "ocr_screenshots": 1
+  },
+  {
+    "scenario": "A01 decorated labels + self row",
+    "participants": 6,
+    "rooms": 1,
+    "adversarial": true,
+    "dom": {
+      "truth": 6,
+      "detected": 6,
+      "missed": 0,
+      "spurious": 0,
+      "room_correct": 6,
+      "near_miss": 0,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "room_accuracy": 1.0,
+      "missed_names": [],
+      "spurious_names": []
+    },
+    "dom_seconds": 0.654,
+    "ocr": {
+      "truth": 6,
+      "detected": 6,
+      "missed": 0,
+      "spurious": 1,
+      "room_correct": 6,
+      "near_miss": 0,
+      "precision": 0.8571,
+      "recall": 1.0,
+      "f1": 0.9231,
+      "room_accuracy": 1.0,
+      "missed_names": [],
+      "spurious_names": [
+        "wwoc"
+      ]
+    },
+    "ocr_seconds": 0.75,
+    "ocr_screenshots": 1
+  },
+  {
+    "scenario": "A02 per-row action buttons",
+    "participants": 6,
+    "rooms": 1,
+    "adversarial": true,
+    "dom": {
+      "truth": 6,
+      "detected": 6,
+      "missed": 0,
+      "spurious": 0,
+      "room_correct": 6,
+      "near_miss": 0,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "room_accuracy": 1.0,
+      "missed_names": [],
+      "spurious_names": []
+    },
+    "dom_seconds": 0.643,
+    "ocr": {
+      "truth": 6,
+      "detected": 6,
+      "missed": 0,
+      "spurious": 0,
+      "room_correct": 6,
+      "near_miss": 0,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "room_accuracy": 1.0,
+      "missed_names": [],
+      "spurious_names": []
+    },
+    "ocr_seconds": 0.7,
+    "ocr_screenshots": 1
+  },
+  {
+    "scenario": "A03 non-room section titles",
+    "participants": 8,
+    "rooms": 2,
+    "adversarial": true,
+    "dom": {
+      "truth": 8,
+      "detected": 8,
+      "missed": 0,
+      "spurious": 0,
+      "room_correct": 8,
+      "near_miss": 0,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "room_accuracy": 1.0,
+      "missed_names": [],
+      "spurious_names": []
+    },
+    "dom_seconds": 0.64,
+    "ocr": {
+      "truth": 8,
+      "detected": 7,
+      "missed": 1,
+      "spurious": 3,
+      "room_correct": 7,
+      "near_miss": 0,
+      "precision": 0.7,
+      "recall": 0.875,
+      "f1": 0.7778,
+      "room_accuracy": 0.875,
+      "missed_names": [
+        "jane smith"
+      ],
+      "spurious_names": [
+        "contributors",
+        "jane",
+        "smith"
+      ]
+    },
+    "ocr_seconds": 0.97,
+    "ocr_screenshots": 1
+  },
+  {
+    "scenario": "A04 custom/non-English room names",
+    "participants": 12,
+    "rooms": 4,
+    "adversarial": true,
+    "dom": {
+      "truth": 12,
+      "detected": 12,
+      "missed": 0,
+      "spurious": 0,
+      "room_correct": 12,
+      "near_miss": 0,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "room_accuracy": 1.0,
+      "missed_names": [],
+      "spurious_names": []
+    },
+    "dom_seconds": 0.646,
+    "ocr": {
+      "truth": 12,
+      "detected": 11,
+      "missed": 1,
+      "spurious": 5,
+      "room_correct": 3,
+      "near_miss": 0,
+      "precision": 0.6875,
+      "recall": 0.9167,
+      "f1": 0.7857,
+      "room_accuracy": 0.25,
+      "missed_names": [
+        "mason lewis"
+      ],
+      "spurious_names": [
+        "group",
+        "lewis",
+        "mason",
+        "sala",
+        "team blue"
+      ]
+    },
+    "ocr_seconds": 1.16,
+    "ocr_screenshots": 1
+  },
+  {
+    "scenario": "A05 virtualized list (60)",
+    "participants": 60,
+    "rooms": 1,
+    "adversarial": true,
+    "dom": {
+      "truth": 60,
+      "detected": 60,
+      "missed": 0,
+      "spurious": 0,
+      "room_correct": 60,
+      "near_miss": 0,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "room_accuracy": 1.0,
+      "missed_names": [],
+      "spurious_names": []
+    },
+    "dom_seconds": 1.891,
+    "ocr": {
+      "truth": 60,
+      "detected": 29,
+      "missed": 31,
+      "spurious": 30,
+      "room_correct": 29,
+      "near_miss": 0,
+      "precision": 0.4915,
+      "recall": 0.4833,
+      "f1": 0.4874,
+      "room_accuracy": 0.4833,
+      "missed_names": [
+        "amelia s44son",
+        "ava m38son",
+        "bob f31son",
+        "chloe c54son",
+        "dylan f57son",
+        "ella y50son"
+      ],
+      "spurious_names": [
+        "amelia",
+        "campbell",
+        "chloe",
+        "dylan",
+        "e56son",
+        "edwards"
+      ]
+    },
+    "ocr_seconds": 6.34,
+    "ocr_screenshots": 5
+  },
+  {
+    "scenario": "A06 duplicate names",
+    "participants": 2,
+    "rooms": 1,
+    "adversarial": true,
+    "dom": {
+      "truth": 2,
+      "detected": 2,
+      "missed": 0,
+      "spurious": 0,
+      "room_correct": 2,
+      "near_miss": 0,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "room_accuracy": 1.0,
+      "missed_names": [],
+      "spurious_names": []
+    },
+    "dom_seconds": 0.645,
+    "ocr": {
+      "truth": 2,
+      "detected": 0,
+      "missed": 2,
+      "spurious": 0,
+      "room_correct": 0,
+      "near_miss": 0,
+      "precision": 1.0,
+      "recall": 0.0,
+      "f1": 0.0,
+      "room_accuracy": 0.0,
+      "missed_names": [
+        "ann roe",
+        "sam lee"
+      ],
+      "spurious_names": []
+    },
+    "ocr_seconds": 0.59,
+    "ocr_screenshots": 1
+  },
+  {
+    "scenario": "A07 panel closed",
+    "participants": 0,
+    "rooms": 0,
+    "adversarial": true,
+    "dom": {
+      "truth": 0,
+      "detected": 0,
+      "missed": 0,
+      "spurious": 0,
+      "room_correct": 0,
+      "near_miss": 0,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "room_accuracy": 1.0,
+      "missed_names": [],
+      "spurious_names": []
+    },
+    "dom_seconds": 0.005,
+    "ocr": {
+      "truth": 0,
+      "detected": 0,
+      "missed": 0,
+      "spurious": 1,
+      "room_correct": 0,
+      "near_miss": 0,
+      "precision": 0.0,
+      "recall": 1.0,
+      "f1": 0.0,
+      "room_accuracy": 1.0,
+      "missed_names": [],
+      "spurious_names": [
+        "meeting details"
+      ]
+    },
+    "ocr_seconds": 0.55,
+    "ocr_screenshots": 1
+  }
+]

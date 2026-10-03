@@ -104,9 +104,16 @@ tracking loop → `Ctrl+C` to stop and save.
 
 | Item | Status |
 |---|---|
-| Name normalisation, engine (join/leave/grace/rooms/shutdown) | ✅ unit-tested offline (6 tests pass) |
-| `JS_FIND_PANEL`, `JS_PANEL_OPEN`, `JS_EXTRACT` | ✅ run in headless Chromium against a **mock** panel (rooms, scrolling, aria-label and innerText names) |
-| Against **real Google Meet** | ⚠️ **Not yet verified.** I had no Meet session. Selectors follow Meet's accessibility attributes as best known, but the real markup (especially how breakout-room headings are rendered) must be confirmed. |
+| Name normalisation, engine (join/leave/grace/rooms/shutdown/concurrency), CSV schema, failed-scan safety | ✅ 24 offline unit tests pass (`test_dom_logic.py`) |
+| Panel extraction JS (`PanelReader` end to end) | ✅ 19 mock-panel scenarios in headless Chromium, 311/311 names and rooms correct, 0 spurious (`verify_dom_vs_ocr.py`) |
+| Adversarial cases | ✅ decorated labels and self row, per-row action buttons, non-room section titles, custom/non-English room names, virtualized 60-row list, duplicate names, closed panel |
+| Against **real Google Meet** | ⚠️ **Not yet verified.** No Meet session was available; mocks follow Meet's accessibility structure but are not Meet. |
+
+Defects found and fixed by this testing:
+1. Room headings were only recognised as "Breakout Room …"; "Breakout 1", "Group A" etc. were filed under Main Call. Now any heading-like element outside a participant row starts a room (non-room titles such as People/Contributors are excluded).
+2. A bare leading verb was stripped from names, so "Pin Sharma" became "Sharma". Now only full Meet phrases ("Pin X to your main screen", "More actions for X") are unwrapped.
+
+Known remaining limits: identical display names in one room collapse to one person; a room literally named like a section title (e.g. "Unassigned") is ignored as a heading; a person literally named "Host", "You" or similar is filtered as UI noise.
 
 ### First-run checklist (do this before relying on it)
 1. Join a test meeting with 2–3 people and, if possible, one breakout room.

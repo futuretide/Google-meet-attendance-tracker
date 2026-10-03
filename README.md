@@ -105,6 +105,8 @@ Two trackers ship in this repo. Both write the same CSV schema.
 | Fix when it breaks | Retune image/regex heuristics | Edit one `JS_*` string (use `--dump-dom`) |
 | Verified on real Google Meet | In production use (per author) | **Not yet** (see caveats) |
 
+> Full accuracy scores and every test case side by side: **[ACCURACY_AND_TEST_COMPARISON.md](ACCURACY_AND_TEST_COMPARISON.md)**
+
 ### Measured results (mock Meet panels, same page given to both trackers)
 
 `verify_dom_vs_ocr.py` renders mock Meet-style side panels in headless Chromium,

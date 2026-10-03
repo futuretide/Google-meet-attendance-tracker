@@ -87,9 +87,99 @@ Reports are saved to the `attendance_logs/` folder:
 6. **Merge logic** combines multi-scroll results, using the first screenshot as canonical room list to prevent duplicates
 7. **Session tracking** logs join/leave events and calculates durations
 
-## Alternative: DOM-based tracker (no OCR)
+## DOM vs OCR: detailed comparison
 
-`GMA_tracker_dom.py` reads names and breakout rooms directly from the Meet page DOM instead of screenshots + OCR. See [`DOM_APPROACH_DESIGN.md`](DOM_APPROACH_DESIGN.md) for design, usage and the first-run checklist (not yet verified against live Meet).
+Two trackers ship in this repo. Both write the same CSV schema.
+
+| | OCR (`GMA_tracker_code.py`) | DOM (`GMA_tracker_dom.py`) |
+|---|---|---|
+| How it reads names | Screenshot, then Tesseract OCR, then regex clean-up | Text/`aria-label` read from the page via Selenium + JS |
+| Presence signal | Name seen (green/yellow dot is logged only) | Name in participant list |
+| Source lines | 1,072 | 484 |
+| Python packages | selenium, undetected-chromedriver, pandas, opencv, pytesseract, Pillow, numpy, psutil | selenium, undetected-chromedriver, pandas |
+| System binaries | Tesseract OCR | none |
+| Needs visible window / fixed layout | Yes (pixel panel-edge detection, dark theme colours) | No |
+| Leave handling | Immediate on one missed scan | Leave after `GRACE_SCANS` (default 2) missed scans, back-dated to last seen |
+| Failed scan (panel closed, stale selectors) | Warns; may feed bad text downstream | Empty snapshot is discarded, so nobody is marked left |
+| Main failure mode | Silent: garbled, split or invented names | Loud: empty snapshot when Meet's markup changes |
+| Fix when it breaks | Retune image/regex heuristics | Edit one `JS_*` string (use `--dump-dom`) |
+| Verified on real Google Meet | In production use (per author) | **Not yet** (see caveats) |
+
+### Measured results (mock Meet panels, same page given to both trackers)
+
+`verify_dom_vs_ocr.py` renders mock Meet-style side panels in headless Chromium,
+then runs the **real** `PanelReader` (DOM) and the **real** `BreakoutRoomTracker`
+(OCR: screenshots, panel-edge detection, Tesseract 5.3.4, `clean_name`,
+`merge_attendance_data`) on each page and scores both against known ground truth.
+19 scenarios, 311 participant slots (12 standard + 7 adversarial). Raw data:
+[`benchmark_results.json`](benchmark_results.json).
+
+| Metric (all 19 scenarios) | DOM | OCR |
+|---|---|---|
+| Names detected exactly (of 311) | **311 (100%)** | 165 (53.1%) |
+| Spurious / garbage names output | **0** | 124 |
+| Names placed in the correct room | **311 (100%)** | 123 (39.5%) |
+| Mean F1 across scenarios | **1.000** | 0.564 |
+| Time, 12 standard scenarios (sum) | **10.3 s** | 21.1 s |
+| Time, 60 people with scrolling | **1.9 s** | 6.4 s (5 screenshots) |
+
+| Scenario | People | DOM found | DOM spurious | DOM s | OCR found | OCR spurious | OCR in correct room | OCR s |
+|---|---|---|---|---|---|---|---|---|
+| S01 small main only | 5 | 5/5 | 0 | 0.65 | 5/5 | 0 | 5 | 0.78 |
+| S02 30 people main | 30 | 30/30 | 0 | 1.27 | 26/30 | 11 | 26 | 3.61 |
+| S03 3 breakout rooms | 22 | 22/22 | 0 | 0.96 | 21/22 | 3 | 3 | 2.39 |
+| S04 60 people (scrolling) | 60 | 60/60 | 0 | 1.91 | 21/60 | 31 | 15 | 6.41 |
+| S05 hard names (accents/CJK/emoji) | 10 | 10/10 | 0 | 0.65 | 1/10 | 5 | 1 | 1.02 |
+| S06 markup: h2 headings | 10 | 10/10 | 0 | 0.65 | 8/10 | 3 | 4 | 1.04 |
+| S07 markup: aria-expanded | 10 | 10/10 | 0 | 0.65 | 8/10 | 3 | 4 | 1.08 |
+| S08 markup: text-only rows | 8 | 8/8 | 0 | 0.65 | 6/8 | 3 | 6 | 0.90 |
+| S09 markup: nested aria | 8 | 8/8 | 0 | 0.65 | 6/8 | 3 | 6 | 0.91 |
+| S11 OCR-native chips layout | 18 | 18/18 | 0 | 0.65 | 0/18 | 6 | 0 | 0.66 |
+| S12 OCR-native, 30 people | 30 | 30/30 | 0 | 0.96 | 0/30 | 13 | 0 | 1.35 |
+| S10 empty rooms | 6 | 6/6 | 0 | 0.64 | 4/6 | 3 | 2 | 0.92 |
+| A01 decorated labels + self row | 6 | 6/6 | 0 | 0.65 | 6/6 | 1 | 6 | 0.75 |
+| A02 per-row action buttons | 6 | 6/6 | 0 | 0.64 | 6/6 | 0 | 6 | 0.70 |
+| A03 non-room section titles | 8 | 8/8 | 0 | 0.64 | 7/8 | 3 | 7 | 0.97 |
+| A04 custom/non-English room names | 12 | 12/12 | 0 | 0.65 | 11/12 | 5 | 3 | 1.16 |
+| A05 virtualized list (60) | 60 | 60/60 | 0 | 1.89 | 29/60 | 30 | 29 | 6.34 |
+| A06 duplicate names | 2 | 2/2 | 0 | 0.65 | 0/2 | 0 | 0 | 0.59 |
+| A07 panel closed | 0 | 0/0 | 0 | 0.01 | 0/0 | 1 | 0 | 0.55 |
+
+What the data shows:
+
+- **Exact names.** DOM keeps accents, CJK, emoji and mixed case. OCR found 1 of 10 in the hard-names scenario.
+- **Scale.** OCR dropped to 35% on a 60-person list; DOM stayed at 100% and was about 3x faster (the DOM time includes about 0.6 s of fixed scroll waits).
+- **Rooms.** DOM headings are matched generically, including custom names like "Group A" and "Sala 1". OCR relies on "Main call" / "Breakout N" text patterns.
+- **Layout independence.** DOM scored 100% on every markup variant of the same panel (S06-S09); OCR ranged from 71% to 100% F1 across them.
+- **Duplicates.** Neither can tell apart two people with identical display names (DOM collapses them; see limitations).
+
+### Caveats: read before trusting these numbers
+
+1. **Mock pages, not live Meet.** I could not run against a real meeting. The mock
+   follows Meet's accessibility structure (`role`, `aria-label`, headings) but the
+   real markup may differ. DOM's 100% means the extraction logic is robust across
+   many plausible markups; it does **not** prove it works on Meet today. Do the
+   first-run check in [`DOM_APPROACH_DESIGN.md`](DOM_APPROACH_DESIGN.md) section 7.
+2. **OCR is under-represented.** The OCR code was tuned on real Meet screens.
+   My mock approximates its fonts, chips and colours, so OCR's absolute numbers
+   here are likely **worse** than on a real screen (S11/S12, a layout built to
+   match its conventions, still scored 0 because names came out as last-name
+   fragments). Treat the OCR column as evidence of fragility to layout, not as
+   its true production accuracy.
+3. **DOM was fixed using this benchmark.** The first run exposed a real defect
+   (breakout headings like "Breakout 1" were not recognised). It was fixed and
+   the scenarios re-run, so the final DOM result is partly tuned to these
+   scenarios. A fresh live test is the real check.
+4. Single run on one machine; timings are indicative only.
+
+### Reproduce
+
+```bash
+python -m unittest test_dom_logic -v     # 24 offline tests
+pip install playwright opencv-python-headless pytesseract pandas pillow numpy psutil selenium
+sudo apt-get install tesseract-ocr       # or the Windows installer
+python verify_dom_vs_ocr.py              # rewrites benchmark_results.json
+```
 
 ## Notes
 

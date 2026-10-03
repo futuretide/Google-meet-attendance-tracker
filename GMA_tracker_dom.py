@@ -67,7 +67,12 @@ _NOISE_LINES = {
     "pin", "unpin", "remove", "more actions", "contributors", "in the meeting",
     "people", "breakout rooms", "main call", "join", "assigned", "not assigned",
 }
-_PREFIX_RE = re.compile(r"^(pin|unpin|mute|unmute|remove|more actions for)\s+", re.I)
+# Only full Meet phrases are stripped, never bare verbs, so a person named "Pin Sharma" survives.
+_WRAP_RES = (
+    re.compile(r"^(?:pin|unpin)\s+(.+?)\s+(?:to|from)\s+your\s+main\s+screen$", re.I),
+    re.compile(r"^more\s+actions\s+for\s+(.+)$", re.I),
+    re.compile(r"^(?:mute|unmute|remove)\s+(.+?)\s+(?:from\s+the\s+(?:meeting|call)|\(microphone\))$", re.I),
+)
 _ZERO_WIDTH = dict.fromkeys(map(ord, "​‌‍⁠﻿"), None)
 
 
@@ -78,8 +83,11 @@ def normalize_name(raw: str) -> str:
     s = raw.translate(_ZERO_WIDTH)
     s = re.sub(r"\s+", " ", s).strip()
     # aria-labels sometimes look like "Jane Smith (You)" or "Pin Jane Smith to your main screen"
-    s = re.sub(r"\s+to your main screen$", "", s, flags=re.I)
-    s = _PREFIX_RE.sub("", s)
+    for rx in _WRAP_RES:
+        m = rx.match(s)
+        if m:
+            s = m.group(1).strip()
+            break
     while True:  # strip stacked suffixes, e.g. "Jane (Host) (You)"
         t = _SUFFIX_RE.sub("", s).strip()
         if t == s:
@@ -274,11 +282,12 @@ return panel();
 JS_EXTRACT = """
 const root = arguments[0] || document.body;
 const mainName = arguments[1];
-const ROOM_RE = /^(main\\s*(call|room|session)|breakout\\s*room\\b.*|room\\s*\\d+.*)$/i;
+// Headings that are NOT rooms (panel titles / section labels).
+const NOT_ROOM = /^(people|participants|breakout\\s*rooms|in the meeting|contributors|invited|waiting|add people|search.*|edit rooms|close rooms|unassigned)$/i;
+const MAIN_RE = /^main\\s*(call|room|session)?$/i;
 const out = []; let room = mainName;
-const walker = document.createTreeWalker(root, NodeFilter.SHOW_ELEMENT);
 function personName(item) {
-  // Preference order: data attribute -> aria-label -> first visible text line.
+  // Preference order: data attribute -> aria-label -> nested aria-label -> first visible text line.
   const d = item.getAttribute('data-participant-name') || item.getAttribute('data-self-name');
   if (d) return d;
   const a = item.getAttribute('aria-label'); if (a) return a;
@@ -286,16 +295,26 @@ function personName(item) {
   const t = (item.innerText || '').split('\\n').map(x => x.trim()).filter(Boolean);
   return t[0] || '';
 }
+function roomLabel(n) {
+  // First visible line, minus a trailing "(N)" count and a trailing "Join" button label.
+  let txt = ((n.getAttribute('aria-label') || n.innerText || '').split('\\n')[0] || '').trim();
+  txt = txt.replace(/\\s*\\(\\d+\\)\\s*$/, '').replace(/\\s+join$/i, '').trim();
+  return txt;
+}
+const walker = document.createTreeWalker(root, NodeFilter.SHOW_ELEMENT);
 let n = walker.currentNode;
 while (n) {
   if (n.getAttribute) {
     const role = n.getAttribute('role');
     if (role === 'listitem') {
       const nm = personName(n); if (nm) out.push([room, nm]);
-    } else if (role === 'heading' || n.tagName === 'H2' || n.tagName === 'H3' || n.getAttribute('aria-expanded') !== null) {
-      const txt = ((n.getAttribute('aria-label') || n.innerText || '').split('\\n')[0] || '').trim();
-      if (txt && txt.length < 60 && ROOM_RE.test(txt.replace(/\\s*\\(\\d+\\)\\s*$/, ''))) {
-        room = txt.replace(/\\s*\\(\\d+\\)\\s*$/, '').trim();
+    } else if (!n.closest('[role="listitem"]') &&
+               (role === 'heading' || n.tagName === 'H2' || n.tagName === 'H3' || n.getAttribute('aria-expanded') !== null)) {
+      // Any heading-like element outside a participant row starts a new room section,
+      // so custom room names ("Group A", "Breakout 1", "Room 3") work without a naming pattern.
+      const txt = roomLabel(n);
+      if (txt && txt.length < 60 && !NOT_ROOM.test(txt)) {
+        room = MAIN_RE.test(txt) ? mainName : txt;
       }
     }
   }

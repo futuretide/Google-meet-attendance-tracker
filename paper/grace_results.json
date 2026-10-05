@@ -1,0 +1,152 @@
+[
+  {
+    "grace_scans": 1,
+    "miss_prob": 0.0,
+    "trials": 300,
+    "people": 15000,
+    "sessions_per_person": 1.0,
+    "fragmented_pct": 0.0,
+    "false_leave_pct": 0.0,
+    "duration_mae_min": 0.0
+  },
+  {
+    "grace_scans": 1,
+    "miss_prob": 0.01,
+    "trials": 300,
+    "people": 15000,
+    "sessions_per_person": 1.1314,
+    "fragmented_pct": 12.35,
+    "false_leave_pct": 12.35,
+    "duration_mae_min": 1.366
+  },
+  {
+    "grace_scans": 1,
+    "miss_prob": 0.02,
+    "trials": 300,
+    "people": 15000,
+    "sessions_per_person": 1.2569,
+    "fragmented_pct": 22.77,
+    "false_leave_pct": 22.77,
+    "duration_mae_min": 2.698
+  },
+  {
+    "grace_scans": 1,
+    "miss_prob": 0.05,
+    "trials": 300,
+    "people": 15000,
+    "sessions_per_person": 1.6075,
+    "fragmented_pct": 45.83,
+    "false_leave_pct": 45.83,
+    "duration_mae_min": 6.484
+  },
+  {
+    "grace_scans": 1,
+    "miss_prob": 0.1,
+    "trials": 300,
+    "people": 15000,
+    "sessions_per_person": 2.1655,
+    "fragmented_pct": 69.69,
+    "false_leave_pct": 69.69,
+    "duration_mae_min": 12.811
+  },
+  {
+    "grace_scans": 2,
+    "miss_prob": 0.0,
+    "trials": 300,
+    "people": 15000,
+    "sessions_per_person": 1.0,
+    "fragmented_pct": 0.0,
+    "false_leave_pct": 0.0,
+    "duration_mae_min": 0.0
+  },
+  {
+    "grace_scans": 2,
+    "miss_prob": 0.01,
+    "trials": 300,
+    "people": 15000,
+    "sessions_per_person": 1.0015,
+    "fragmented_pct": 0.15,
+    "false_leave_pct": 0.15,
+    "duration_mae_min": 0.073
+  },
+  {
+    "grace_scans": 2,
+    "miss_prob": 0.02,
+    "trials": 300,
+    "people": 15000,
+    "sessions_per_person": 1.0045,
+    "fragmented_pct": 0.45,
+    "false_leave_pct": 0.45,
+    "duration_mae_min": 0.177
+  },
+  {
+    "grace_scans": 2,
+    "miss_prob": 0.05,
+    "trials": 300,
+    "people": 15000,
+    "sessions_per_person": 1.0302,
+    "fragmented_pct": 2.97,
+    "false_leave_pct": 2.97,
+    "duration_mae_min": 0.705
+  },
+  {
+    "grace_scans": 2,
+    "miss_prob": 0.1,
+    "trials": 300,
+    "people": 15000,
+    "sessions_per_person": 1.1084,
+    "fragmented_pct": 10.35,
+    "false_leave_pct": 10.35,
+    "duration_mae_min": 2.26
+  },
+  {
+    "grace_scans": 3,
+    "miss_prob": 0.0,
+    "trials": 300,
+    "people": 15000,
+    "sessions_per_person": 1.0,
+    "fragmented_pct": 0.0,
+    "false_leave_pct": 0.0,
+    "duration_mae_min": 0.0
+  },
+  {
+    "grace_scans": 3,
+    "miss_prob": 0.01,
+    "trials": 300,
+    "people": 15000,
+    "sessions_per_person": 1.0001,
+    "fragmented_pct": 0.01,
+    "false_leave_pct": 0.01,
+    "duration_mae_min": 0.047
+  },
+  {
+    "grace_scans": 3,
+    "miss_prob": 0.02,
+    "trials": 300,
+    "people": 15000,
+    "sessions_per_person": 1.0001,
+    "fragmented_pct": 0.01,
+    "false_leave_pct": 0.01,
+    "duration_mae_min": 0.105
+  },
+  {
+    "grace_scans": 3,
+    "miss_prob": 0.05,
+    "trials": 300,
+    "people": 15000,
+    "sessions_per_person": 1.0016,
+    "fragmented_pct": 0.16,
+    "false_leave_pct": 0.16,
+    "duration_mae_min": 0.292
+  },
+  {
+    "grace_scans": 3,
+    "miss_prob": 0.1,
+    "trials": 300,
+    "people": 15000,
+    "sessions_per_person": 1.0107,
+    "fragmented_pct": 1.07,
+    "false_leave_pct": 1.07,
+    "duration_mae_min": 0.776
+  }
+]

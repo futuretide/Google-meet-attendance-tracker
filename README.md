@@ -105,6 +105,8 @@ Two trackers ship in this repo. Both write the same CSV schema.
 | Fix when it breaks | Retune image/regex heuristics | Edit one `JS_*` string (use `--dump-dom`) |
 | Verified on real Google Meet | In production use (per author) | **Not yet** (see caveats) |
 
+> Full accuracy scores and every test case side by side: **[ACCURACY_AND_TEST_COMPARISON.md](ACCURACY_AND_TEST_COMPARISON.md)**
+
 ### Measured results (mock Meet panels, same page given to both trackers)
 
 `verify_dom_vs_ocr.py` renders mock Meet-style side panels in headless Chromium,
@@ -175,11 +177,15 @@ What the data shows:
 ### Reproduce
 
 ```bash
-python -m unittest test_dom_logic -v     # 24 offline tests
+python -m unittest test_dom_logic -v     # 25 offline tests
 pip install playwright opencv-python-headless pytesseract pandas pillow numpy psutil selenium
 sudo apt-get install tesseract-ocr       # or the Windows installer
 python verify_dom_vs_ocr.py              # rewrites benchmark_results.json
 ```
+
+## Research paper
+
+An IEEE-format paper describing the DOM approach, the OCR baseline, the evaluation and its limits is in [`paper/`](paper/) ([PDF](paper/main.pdf), LaTeX source, figures and the scripts that generate every number).
 
 ## Notes
 

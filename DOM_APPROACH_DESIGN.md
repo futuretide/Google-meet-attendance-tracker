@@ -104,7 +104,7 @@ tracking loop → `Ctrl+C` to stop and save.
 
 | Item | Status |
 |---|---|
-| Name normalisation, engine (join/leave/grace/rooms/shutdown/concurrency), CSV schema, failed-scan safety | ✅ 24 offline unit tests pass (`test_dom_logic.py`) |
+| Name normalisation, engine (join/leave/grace/rooms/shutdown/concurrency), CSV schema, failed-scan safety | ✅ 25 offline unit tests pass (`test_dom_logic.py`) |
 | Panel extraction JS (`PanelReader` end to end) | ✅ 19 mock-panel scenarios in headless Chromium, 311/311 names and rooms correct, 0 spurious (`verify_dom_vs_ocr.py`) |
 | Adversarial cases | ✅ decorated labels and self row, per-row action buttons, non-room section titles, custom/non-English room names, virtualized 60-row list, duplicate names, closed panel |
 | Against **real Google Meet** | ⚠️ **Not yet verified.** No Meet session was available; mocks follow Meet's accessibility structure but are not Meet. |
@@ -112,6 +112,8 @@ tracking loop → `Ctrl+C` to stop and save.
 Defects found and fixed by this testing:
 1. Room headings were only recognised as "Breakout Room …"; "Breakout 1", "Group A" etc. were filed under Main Call. Now any heading-like element outside a participant row starts a room (non-room titles such as People/Contributors are excluded).
 2. A bare leading verb was stripped from names, so "Pin Sharma" became "Sharma". Now only full Meet phrases ("Pin X to your main screen", "More actions for X") are unwrapped.
+
+3. At shutdown, a person who had already left but was still inside the grace window was credited up to the stop time. Their leave time is now back-dated to their last observation (found by the grace-period simulation in `paper/`).
 
 Known remaining limits: identical display names in one room collapse to one person; a room literally named like a section title (e.g. "Unassigned") is ignored as a heading; a person literally named "Host", "You" or similar is filtered as UI noise.
 

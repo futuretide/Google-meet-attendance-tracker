@@ -176,11 +176,17 @@ class AttendanceEngine:
     def finalize(self, now: Optional[datetime] = None) -> None:
         now = now or datetime.now()
         with self.lock:
-            for state in self.rooms.values():
+            for room, state in self.rooms.items():
+                # Someone already missing from recent scans (but still inside the grace
+                # window) left before shutdown: back-date to when they were last seen.
+                for key, s in state.present.items():
+                    if state.misses.get(key, 0) > 0 and s.leave_time is None:
+                        s.leave_time = self._last_seen.get((room, key), now)
                 for s in state.sessions:
                     if s.leave_time is None:
                         s.leave_time = now
                 state.present.clear()
+                state.misses.clear()
 
     def rows(self) -> List[dict]:
         out = []

@@ -74,13 +74,13 @@ Per group:
 
 | Area | Tests | What is checked |
 |---|---|---|
-| Attendance engine (edge cases) | 10 | concurrent update and rows threadsafe, duplicate names same poll collapse to one, finalize idempotent and sets leave time, grace one leaves immediately, grace zero is clamped to one, large roster 100 people 20 scans, noise rows never become participants, rejoin after leave makes second session, room appearing later and empty snapshot room, self excluded case insensitively and with suffix |
+| Attendance engine (edge cases) | 11 | concurrent update and rows threadsafe, duplicate names same poll collapse to one, finalize back-dates someone who left inside the grace window, finalize idempotent and sets leave time, grace one leaves immediately, grace zero is clamped to one, large roster 100 people 20 scans, noise rows never become participants, rejoin after leave makes second session, room appearing later and empty snapshot room, self excluded case insensitively and with suffix |
 | Attendance engine | 3 | glitch does not split session, join leave with backdated leave, room move and rejoin |
 | Name cleaning (edge cases) | 4 | more noise, name containing noise word kept, unicode and emoji preserved, whitespace and case variants |
 | Name cleaning | 3 | key case insensitive, noise rejected, suffixes and prefixes |
 | CSV reports | 2 | csv schema matches ocr tool, empty rows writes nothing |
 | Failed-scan safety | 2 | closed panel that cannot reopen is skipped, empty snapshot does not end sessions |
-| **Total** | **24** | all passing |
+| **Total** | **25** | all passing |
 
 ## 5. Limitations
 

@@ -177,11 +177,15 @@ What the data shows:
 ### Reproduce
 
 ```bash
-python -m unittest test_dom_logic -v     # 24 offline tests
+python -m unittest test_dom_logic -v     # 25 offline tests
 pip install playwright opencv-python-headless pytesseract pandas pillow numpy psutil selenium
 sudo apt-get install tesseract-ocr       # or the Windows installer
 python verify_dom_vs_ocr.py              # rewrites benchmark_results.json
 ```
+
+## Research paper
+
+An IEEE-format paper describing the DOM approach, the OCR baseline, the evaluation and its limits is in [`paper/`](paper/) ([PDF](paper/main.pdf), LaTeX source, figures and the scripts that generate every number).
 
 ## Notes
 

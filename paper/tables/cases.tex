@@ -1,0 +1,33 @@
+\begin{table*}[t]
+\caption{Per-case results. \emph{Found} = real names recovered exactly; \emph{Extra} = output names that are not real; \emph{Room} = names in the correct room. $n$ = real participants.}
+\label{tab:cases}
+\centering\footnotesize
+\begin{tabular}{llrcrrcrrrr}
+\toprule
+ & & & \multicolumn{2}{c}{DOM} & & \multicolumn{4}{c}{OCR} & \\
+\cmidrule(lr){4-5}\cmidrule(lr){7-10}
+ID & Description & $n$ & Found & Extra & & Found & Extra & Room & Time (s) \\
+\midrule
+S01 & Baseline, 5 people, 1 room & 5 & 5 & 0 & & 5 & 0 & 5 & 0.8 \\
+S02 & 30 people, Main Call & 30 & 30 & 0 & & 26 & 11 & 26 & 3.6 \\
+S03 & Main + 3 breakout rooms & 22 & 22 & 0 & & 21 & 3 & 3 & 2.4 \\
+S04 & 60 people, 3 rooms, scrolled & 60 & 60 & 0 & & 21 & 31 & 15 & 6.4 \\
+S05 & Accents, CJK, Cyrillic, emoji & 10 & 10 & 0 & & 1 & 5 & 1 & 1.0 \\
+S06 & Headings as \texttt{<h2>} & 10 & 10 & 0 & & 8 & 3 & 4 & 1.0 \\
+S07 & Headings via \texttt{aria-expanded} & 10 & 10 & 0 & & 8 & 3 & 4 & 1.1 \\
+S08 & Rows without \texttt{aria-label} & 8 & 8 & 0 & & 6 & 3 & 6 & 0.9 \\
+S09 & Nested \texttt{aria-label} & 8 & 8 & 0 & & 6 & 3 & 6 & 0.9 \\
+S10 & Empty rooms between rooms & 6 & 6 & 0 & & 4 & 3 & 2 & 0.9 \\
+S11 & OCR-native chip layout & 18 & 18 & 0 & & 0 & 6 & 0 & 0.7 \\
+S12 & OCR-native chips, 30 people & 30 & 30 & 0 & & 0 & 13 & 0 & 1.4 \\
+\midrule
+A01 & Decorated labels + own row & 6 & 6 & 0 & & 6 & 1 & 6 & 0.8 \\
+A02 & Per-row action buttons & 6 & 6 & 0 & & 6 & 0 & 6 & 0.7 \\
+A03 & Non-room section titles & 8 & 8 & 0 & & 7 & 3 & 7 & 1.0 \\
+A04 & Custom/non-English room names & 12 & 12 & 0 & & 11 & 5 & 3 & 1.2 \\
+A05 & Virtualized list, 60 people & 60 & 60 & 0 & & 29 & 30 & 29 & 6.3 \\
+A06 & One person listed twice & 2 & 2 & 0 & & 0 & 0 & 0 & 0.6 \\
+A07 & Panel not open & 0 & 0 & 0 & & 0 & 1 & 0 & 0.6 \\
+\bottomrule
+\end{tabular}
+\end{table*}

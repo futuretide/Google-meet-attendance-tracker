@@ -123,6 +123,15 @@ class EngineEdgeTests(unittest.TestCase):
         e.update({"Main Call": ["A"], "Room 1": ["B"]}, self.at(5))
         self.assertEqual({r["Room"] for r in e.rows()}, {"Main Call", "Room 1"})
 
+    def test_finalize_backdates_person_who_left_inside_grace_window(self):
+        e = AttendanceEngine(grace_scans=3, your_name="")
+        e.update({"R": ["A", "B"]}, self.at(0))
+        e.update({"R": ["A", "B"]}, self.at(5))
+        e.update({"R": ["A"]}, self.at(10))          # B missing: 1 of 3 grace scans used
+        e.finalize(self.at(12))
+        mins = {r["Name"]: r["Duration_Minutes"] for r in e.rows()}
+        self.assertEqual(mins, {"A": 12.0, "B": 5.0})  # B credited only until last seen
+
     def test_finalize_idempotent_and_sets_leave_time(self):
         e = AttendanceEngine(your_name="")
         e.update({"R": ["A"]}, self.at(0))
